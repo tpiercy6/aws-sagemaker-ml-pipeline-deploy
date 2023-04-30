@@ -2,6 +2,10 @@
 
 This repository contains Infrastructure as Code (IaC) to create and manage AWS infrastructure for a Machine Learning pipeline with SageMaker and Step Functions. Further it contains sample code for a Docker image to train and serve according to custom models on SageMaker. 
 
+=== Fedora Kinoite `build_sagemaker_toolbox.sh` script
+
+This script is provided as is to allow Linux users to install the required tools, `terraform` and AWS CLI, into a local container. This keeps your immutable filesystem clean!
+
 === Deploy AWS Infrastructure with Terraform
 In order to deploy the ML pipeline, you will need to adjust the project name variable. The code for the Terraform part is in this repository in the folder:
 

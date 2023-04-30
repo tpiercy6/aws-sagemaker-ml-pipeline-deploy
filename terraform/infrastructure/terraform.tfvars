@@ -1,10 +1,16 @@
-## Change project_name to your project name
-project_name = "ml-pipeline-terraform-demo" //put your project name here
-region = "eu-west-1" //change region if desired to deploy in another region
+#
+# Variables updated to reflect BreakFree requirements. Note that the region is
+# determined by the supported regions in the BreakFree AWS subscription.
+#
 
-## Change instance types amd volume size for SageMaker if desired
-training_instance_type = "ml.m5.xlarge"
-inference_instance_type = "ml.c5.large"
+## Change project_name to your project name
+project_name = "breakfree-ml-pipeline" 
+region = "us-east-1" 
+
+## Updated instance types for the lowest priced possible (free tier, according
+## to https://aws.amazon.com/sagemaker/pricing/)
+training_instance_type = "ml.m3.medium"
+inference_instance_type = "ml.m3.medium"
 volume_size_sagemaker = 5
 
 ## Should not be changed with the current folder structure
