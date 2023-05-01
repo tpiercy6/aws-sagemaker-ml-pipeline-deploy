@@ -7,19 +7,12 @@ This repository contains Infrastructure as Code (IaC) to create and manage AWS i
 This script is provided as is to allow Linux users to install the required tools, `terraform` and AWS CLI, into a local container. This keeps your immutable filesystem clean!
 
 === Deploy AWS Infrastructure with Terraform
-In order to deploy the ML pipeline, you will need to adjust the project name variable. The code for the Terraform part is in this repository in the folder:
 
-```shell script
-/terraform
-```
-
-When initialising for the first time:
-
-- Open the file "terraform/infrastructure/terraform.tfvars" and adjust the variable "project_name" to the name of your project, as well as the variable "region" if you want to deploy in another region. Further, you can change additional variables such as instance types for training and inference.
+The `terraform/infrastructure/terraform.tfvars` has been updated with a new project name (`breakfree`) and instance types amended to cheapest available for machine learning (`ml.c3.medium`). Also, the region has been updated to `us-east-1`.
  
-Afterwards follow the steps below to deploy the infrastructure with Terraform.
+Afterwards follow the steps below to deploy the infrastructure with Terraform. Note for the `AWS_PROFILE` refer to https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials_profiles.html[Using the AWS credentials file and credential Profiles] for guidance on multiple profiles.
 
-```shell script
+```bash
 export AWS_PROFILE=<your_aws_cli_profile_name>
 
 cd terraform/infrastructure
