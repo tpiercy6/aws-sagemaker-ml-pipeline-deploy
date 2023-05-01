@@ -1,11 +1,13 @@
 = TODO
 
 - Destroy all ECR container images and SageMaker Endpoint, Endpoint Configuration, and Models in a script
+
     - Use `aws` CLI to list above resources.
     - Parse the JSON to retrieve the necessary items.
     - Loop through the items and destroy each with the appropriate command.
 
 - Separate the Terraform code from any `src` container/model code.
+
     - Keep in separate repositories.
     - Establish naming convention for the AWS Step Function.
     - Use the Step Function for other models in separate repo's.
