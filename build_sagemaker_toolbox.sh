@@ -45,6 +45,11 @@ alias docker-compose='\''flatpak-spawn --host /usr/bin/podman-compose'\'' \n\
 alias podman='\''flatpak-spawn --host /usr/bin/podman'\'' "\
 > /etc/profile.d/podman.sh'
 
+## Link `podman` to local host binaries
+$RUN sudo bash -c 'echo -e "\
+export AWS_PROFILE=breakfree "\
+> /etc/profile.d/aws_profile.sh'
+
 # Exit after installation
 
 echo -e "\n## Completed installation of:\n"
