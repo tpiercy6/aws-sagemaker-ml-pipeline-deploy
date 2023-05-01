@@ -215,6 +215,14 @@ resource "aws_s3_bucket" "bucket_training_data" {
 resource "aws_s3_bucket_acl" "bucket_training_data_acl" {
   bucket = aws_s3_bucket.bucket_training_data.id
   acl    = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.bucket_training_data_acl_ownership]
+}
+
+resource "aws_s3_bucket_ownership_controls" "bucket_training_data_acl_ownership" {
+  bucket = aws_s3_bucket.bucket_training_data.id
+  rule {
+    object_ownership = "ObjectWriter"
+  }
 }
 
 resource "aws_s3_object" "object" {
@@ -230,6 +238,14 @@ resource "aws_s3_bucket" "bucket_output_models" {
 resource "aws_s3_bucket_acl" "bucket_output_models_acl" {
   bucket = aws_s3_bucket.bucket_output_models.id
   acl    = "private"
+  depends_on = [aws_s3_bucket_ownership_controls.bucket_output_models_acl_ownership]
+}
+
+resource "aws_s3_bucket_ownership_controls" "bucket_output_models_acl_ownership" {
+  bucket = aws_s3_bucket.bucket_output_models.id
+  rule {
+    object_ownership = "ObjectWriter"
+  }
 }
 
 #################################################
