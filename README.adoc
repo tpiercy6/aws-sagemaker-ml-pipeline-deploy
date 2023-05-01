@@ -1,6 +1,10 @@
 = Deploy and manage Machine Learning pipelines with Terraform using Amazon SageMaker
+:toc:
+:imagesdir: images
 
 This repository contains Infrastructure as Code (IaC) to create and manage AWS infrastructure for a Machine Learning pipeline with SageMaker and Step Functions. Further it contains sample code for a Docker image to train and serve according to custom models on SageMaker. 
+
+image::architecture-diagram.png[jpg]
 
 === Fedora Kinoite `build_sagemaker_toolbox.sh` script
 
@@ -13,15 +17,11 @@ The `terraform/infrastructure/terraform.tfvars` has been updated with a new proj
 Afterwards follow the steps below to deploy the infrastructure with Terraform. Note for the `AWS_PROFILE` refer to https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials_profiles.html[Using the AWS credentials file and credential Profiles] for guidance on multiple profiles.
 
 ```bash
-export AWS_PROFILE=<your_aws_cli_profile_name>
-
-cd terraform/infrastructure
-
-terraform init
-
-terraform plan
-
-terraform apply
+$ export AWS_PROFILE=<your_aws_cli_profile_name>
+$ cd terraform/infrastructure
+$ terraform init
+$ terraform plan
+$ terraform apply
 ```
 
 Check the output and make sure the planned resources appear correctly and confirm with ‘yes’ in the apply stage if everything is correct. Once successfully applied, go to ECR (or check the output of Terraform in the Terminal) and get the URL for your ECR repository just created via Terraform.
@@ -31,18 +31,13 @@ Check the output and make sure the planned resources appear correctly and confir
 
 For the ML pipeline and SageMaker to train and provision an endpoint for inference, you need to provide a Docker image and store it in ECR. In the folder "sagemaker_byo" you will find an example, which relies on this repository https://github.com/aws/amazon-sagemaker-examples/tree/master/advanced_functionality/scikit_bring_your_own. If you already have applied the AWS infrastructure from the Terraform part, you can just push the Docker image as described below. Once your Docker image is developed, you can take the following actions and push it to ECR (adapt the ECR URL according to your output URL from the previous step):
 
-```shell script
-cd src/container
-
-export AWS_PROFILE=<your_aws_cli_profile_name> #If already done at the step above and profile still active, skip this step
-
-aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <account_number>.dkr.ecr.eu-west-1.amazonaws.com
-
-docker build -t ml-training .
-
-docker tag ml-training:latest <account_number>.dkr.ecr.eu-west-1.amazonaws.com/<ecr_repository_name>:latest
-
-docker push <account_number>.dkr.ecr.eu-west-1.amazonaws.com/<ecr_repository_name>
+```bash
+$ cd src/container
+$ export AWS_PROFILE=<your_aws_cli_profile_name> #If already done at the step above and profile still active, skip this step
+$ aws ecr get-login-password --region eu-west-1 | docker login --username AWS --password-stdin <account_number>.dkr.ecr.eu-west-1.amazonaws.com
+$ docker build -t ml-training .
+$ docker tag ml-training:latest <account_number>.dkr.ecr.eu-west-1.amazonaws.com/<ecr_repository_name>:latest
+$ docker push <account_number>.dkr.ecr.eu-west-1.amazonaws.com/<ecr_repository_name>
 ```
 
 === Run the ML pipeline
@@ -88,10 +83,9 @@ In order to clean up, you can destroy the infrastructure created by Terraform wi
  
 - Destroy the infrastructure created via Terraform
 
-```shell script
-cd terraform/infrastructure
-
-terraform destroy
+```bash
+$ cd terraform/infrastructure
+$ terraform destroy
 ```
 
 - Delete the SageMaker Endpoints, Endpoint Configuration and Models created via the Step Function in the AWS Console or via the AWS CLI.
