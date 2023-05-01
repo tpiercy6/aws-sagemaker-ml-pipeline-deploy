@@ -77,7 +77,7 @@ print(label)
 
 In order to clean up, you can destroy the infrastructure created by Terraform with the command “terraform destroy”. But you will need to delete the data and files in the S3 buckets first. Further, the SageMaker Endpoint (or multiple SageMaker Endpoints if run multiple times) created via Step Functions is not managed via Terraform, but rather deployed when running the ML pipeline with Step Functions. Therefore, make sure you delete the SageMaker Endpoints created via the Step Function ML pipeline as well to avoid unnecessary costs.
 
-=== Steps:
+==== Steps:
 
 - Delete the dataset in the S3 training bucket and all models you trained via the ML pipeline in the S3 bucket for the models in the AWS Console or via the AWS CLI
  
