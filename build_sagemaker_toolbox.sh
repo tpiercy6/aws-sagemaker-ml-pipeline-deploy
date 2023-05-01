@@ -21,7 +21,7 @@ $RUN sudo dnf config-manager --add-repo https://rpm.releases.hashicorp.com/fedor
 
 ## List of applications to be installed
 
-APPLICATIONS=( terraform )
+APPLICATIONS=( terraform python3-boto3 python3-pandas )
 
 ## Install applications
 

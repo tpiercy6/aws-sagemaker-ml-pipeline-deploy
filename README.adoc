@@ -83,8 +83,20 @@ In order to clean up, you can destroy the infrastructure created by Terraform wi
 
 ==== Steps:
 
-- Delete the dataset in the S3 training bucket and all models you trained via the ML pipeline in the S3 bucket for the models in the AWS Console or via the AWS CLI
- 
+- Destroy the data in each of the created S3 buckets. Note that the buckets' names are outputted as part of the `terraform apply` when creating the infrastructure. Also note that bucket versioning should *not* be enabled.
+
+```bash
+$ aws s3 rm s3://< _breakfree-ml-pipeline-training-data name_ > --recursive
+$ aws aws s3 rm s3://< _breakfree-ml-pipeline-output-models name_ > --recursive
+```
+
+- Destroy all container images in ECR.
+
+```bash
+$ aws ecr list-images --repository-name breakfree-ml-pipeline
+$ aws ecr batch-delete-image --repository-name breakfree-ml-pipeline --image-ids imageDigest=< _image_digest_from_previous_command_ > [ imagedDigest=< _other_image_digests_from_previous_command_ > ]
+```
+
 - Destroy the infrastructure created via Terraform
 
 ```bash
@@ -93,3 +105,12 @@ $ terraform destroy
 ```
 
 - Delete the SageMaker Endpoints, Endpoint Configuration and Models created via the Step Function in the AWS Console or via the AWS CLI.
+
+```bash
+$ aws sagemaker list-endpoints
+$ aws sagemaker delete-endpoint --endpoint-name < _endpoint_name_ >
+$ aws sagemaker list-endpoint-configs
+$ aws sagemaker delete-endpoint-config --endpoint-config-name < _endpoint_config_name_ >
+$ aws sagemaker list-models
+$ aws sagemaker delete-model --model-name < _model_name_ >
+```
