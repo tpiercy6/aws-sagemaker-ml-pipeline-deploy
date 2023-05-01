@@ -24,7 +24,7 @@ $ terraform plan
 $ terraform apply
 ```
 
-Check the output and make sure the planned resources appear correctly and confirm with ‘yes’ in the apply stage if everything is correct. Once successfully applied, go to ECR (or check the output of Terraform in the Terminal) and get the URL for your ECR repository just created via Terraform.
+Check the output and make sure the planned resources appear correctly and confirm with ‘yes’ in the apply stage if everything is correct. Once successfully applied, record the output of the Terraform in the Terminal and get the URL for your ECR repository just created via Terraform. Note that both S3 buckets' names are also displayed and are used when destroying the resources later in this README.
 
 
 === Push your Docker Image to ECR
@@ -56,7 +56,7 @@ In order to invoke your endpoint (in this example for the iris dataset), you can
 $ cd src/invocation_script
 $ chmod 0755 boto3_invoke.py  ## As needed
 $ aws sagemaker list-endpoints 
-$ ./boto3_invoke.py -e < _sagemaker-enpoint-from-previous-command_ >
+$ ./boto3_invoke.py -e < _sagemaker-endpoint-name-from-previous-command_ >
 ```
 
 === Cleanup
@@ -68,8 +68,8 @@ In order to clean up, you can destroy the infrastructure created by Terraform wi
 - Destroy the data in each of the created S3 buckets. Note that the buckets' names are outputted as part of the `terraform apply` when creating the infrastructure. Also note that bucket versioning should *not* be enabled.
 
 ```bash
-$ aws s3 rm s3://< _breakfree-ml-pipeline-training-data name_ > --recursive
-$ aws aws s3 rm s3://< _breakfree-ml-pipeline-output-models name_ > --recursive
+$ aws s3 rm s3://< _bucket_training_data_name_ > --recursive
+$ aws aws s3 rm s3://< _bucket_output_models_name_ > --recursive
 ```
 
 - Destroy all container images in ECR.

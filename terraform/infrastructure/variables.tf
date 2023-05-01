@@ -1,5 +1,5 @@
 variable "region" {
-  type    = string
+  type = string
 }
 
 variable "project_name" {
@@ -15,17 +15,17 @@ variable "handler" {
 }
 
 variable "runtime" {
-  type = string
+  type    = string
   default = "python3.7"
 }
 
 variable "memory_size" {
-  type = string
+  type    = string
   default = "128"
 }
 
 variable "timeout" {
-  type = string
+  type    = string
   default = "200"
 }
 

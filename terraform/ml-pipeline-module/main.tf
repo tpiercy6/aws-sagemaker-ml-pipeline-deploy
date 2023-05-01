@@ -409,3 +409,13 @@ output "ecr_repository_url" {
   value = aws_ecr_repository.ecr_repository.repository_url
   description = "ECR URL for the Docker Image"
 }
+
+output "bucket_training_data_name" {
+  value = aws_s3_bucket.bucket_training_data.id
+  description = "Name of the training data bucket"
+}
+
+output "bucket_output_models_name" {
+  value = aws_s3_bucket.bucket_output_models.id
+  description = "Name of the output models bucket"
+}
