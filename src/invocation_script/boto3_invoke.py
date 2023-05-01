@@ -1,10 +1,18 @@
+#!/usr/bin/python3
+
 import boto3
 from io import StringIO
 import pandas as pd
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-e", "--endpoint")
 
 client = boto3.client('sagemaker-runtime')
 
-endpoint_name = 'breakfree-ml-pipeline-20230501174622' # Your endpoint name.
+args = parser.parse_args()
+endpoint = args.endpoint
+endpoint_name = endpoint # Your endpoint name.
 content_type = "text/csv"   # The MIME type of the input data in the request body.
 
 payload = pd.DataFrame([[1.5,0.2,4.4,2.6]])
