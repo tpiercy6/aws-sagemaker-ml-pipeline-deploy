@@ -40,6 +40,10 @@ $ docker tag ml-training:latest <account_number>.dkr.ecr.eu-west-1.amazonaws.com
 $ docker push <account_number>.dkr.ecr.eu-west-1.amazonaws.com/<ecr_repository_name>
 ```
 
+*Note* that when using `podman` in place of `docker` that during the build step you must provide the required format, i.e.:
+
+   $ docker build --format docker -t ml-training . 
+
 === Run the ML pipeline
 
 In order to train and run the ML pipeline, go to Step Functions and start the execution. You can check progress of SageMaker also in the Training Jobs section of SageMaker and once the SageMaker Endpoint is created you can also check your SageMaker Endpoint. After running the State Machine in Step Functions successfully, you will see the SageMaker Endpoint being created in the AWS Console in the SageMaker Endpoints section. Make sure to wait for the Status to change to “InService”.
