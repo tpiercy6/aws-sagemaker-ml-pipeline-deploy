@@ -1,5 +1,7 @@
 = TODO
 
+* Move Terraform state file to S3 bucket
+
 * Destroy all ECR container images and SageMaker Endpoint, Endpoint Configuration, and Models in a script
 ** Use `aws` CLI to list above resources.
 ** Parse the JSON to retrieve the necessary items.
