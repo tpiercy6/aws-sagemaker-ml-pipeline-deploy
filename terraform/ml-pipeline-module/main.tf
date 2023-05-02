@@ -299,7 +299,7 @@ resource "aws_lambda_function" "lambda_function" {
 resource "aws_sfn_state_machine" "sfn_state_machine" {
   name     = "${var.project_name}-state-machine"
   role_arn = aws_iam_role.sf_exec_role.arn
-
+  type     = "EXPRESS"
   definition = <<-EOF
   {
   "Comment": "An AWS Step Function State Machine to train, build and deploy an Amazon SageMaker model endpoint",
