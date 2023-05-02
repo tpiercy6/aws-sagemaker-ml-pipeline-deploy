@@ -1,3 +1,37 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Codespaces
+Marketplace
+Explore
+ 
+@tpiercy6 
+tpiercy6
+/
+aws-sagemaker-ml-pipeline-deploy
+Public
+forked from break-free/aws-sagemaker-ml-pipeline-deploy
+Cannot fork because you own this repository and are not a member of any organizations.
+Code
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+Settings
+Beta Try the new code view
+aws-sagemaker-ml-pipeline-deploy/terraform/ml-pipeline-module/main.tf
+@tpiercy6
+tpiercy6 Update main.tf
+Latest commit 244bf9a now
+ History
+ 2 contributors
+@tpiercy6@cmills-bf
+419 lines (374 sloc)  11.8 KB
+ 
+
 #################################################
 # Variables & Locals
 #################################################
@@ -417,3 +451,17 @@ output "bucket_output_models_name" {
   value = aws_s3_bucket.bucket_output_models.id
   description = "Name of the output models bucket"
 }
+Footer
+© 2023 GitHub, Inc.
+Footer navigation
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
