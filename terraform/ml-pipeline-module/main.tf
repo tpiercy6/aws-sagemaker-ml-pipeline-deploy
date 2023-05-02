@@ -295,7 +295,14 @@ resource "aws_lambda_function" "lambda_function" {
 #################################################
 # Step Function
 #################################################
+resource "aws_cloudwatch_log_group" "log_group_for_sfn" {
+  name     = "test"
 
+  tags = {
+    Environment = "test"
+    Application = "test"
+  }
+}
 resource "aws_sfn_state_machine" "sfn_state_machine" {
   name     = "${var.project_name}-state-machine"
   role_arn = aws_iam_role.sf_exec_role.arn
